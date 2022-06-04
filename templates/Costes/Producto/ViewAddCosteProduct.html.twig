@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>{{ product.Name }}</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <a type="button" href="{{path('CostesProductoInicio')}}" class="btn btn-secondary" style="float:right; margin:5px;">Volver</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct" style="float:right; margin:5px;">Añadir</button>
+                    </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row mt-4">
+                    <section>
+                        <div class="row">
+                            <div class="col">
+                                <table class="table striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Pedido Proveedor</th>
+                                            <th>M Salida</th>
+                                            <th>M Entrada</th>
+                                            <th>% Merma</th>
+                                            <th>Coste Almacen M.</th>
+                                            <th>Coste Merma</th>
+                                            <th>Merma M. Final</th>
+                                            <th>Coste Transporte M.</th>
+                                            <th>Coste Estampacion M.</th>
+                                            <th>Coste Extra</th>
+                                            <th>Total</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for coste in product.costes %}
+                                            <tr>
+                                                <td>{{ coste.PedidoProv }}</td>
+                                                <td>{{ coste.MTS }}</td>
+                                                <td>{{ coste.MTE }}</td>
+                                                {% if coste.MTE and coste.MTS %}
+                                                <td>{{ ((coste.MTS - coste.MTE) / coste.MTS) * 100 }}%</td>
+                                                <td>{{ (coste.MTS * coste.CosteAlmProductBase) / coste.MTE }}</td>
+                                                <td>{{ (coste.MTS - coste.MTE) * coste.CosteAlmProductBase }}</td>
+                                                <td>{{ ((coste.MTS - coste.MTE) * coste.CosteAlmProductBase) / coste.MTS  }}</td>
+                                                <td>{{ coste.Transporte / coste.MTE }}</td>
+                                                <td>{{ coste.PrecioFactProv / coste.MTE }}</td>
+                                                <td>{{ coste.Extras }}</td>
+                                                <td>{{ ((coste.MTS * coste.CosteAlmProductBase) / coste.MTE) +  (((coste.MTS - coste.MTE) * coste.CosteAlmProductBase) / coste.MTS) +  (coste.Transporte / coste.MTE) + (coste.PrecioFactProv / coste.MTE) + coste.Extras }}</td>
+                                                {% else %}
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{ coste.Extras }}</td>
+                                                <td>{{ coste.Extras }}</td>
+                                                {% endif %}
+                                                <td>
+                                                    <a class="btn btn-sm btn-outline-success" href="{{ path('costeView', { 'id': coste.id }) }}">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                                        </svg>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<div class="modal fade" id="addProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Crear Producto</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {{ form_start(form) }}
+                <form>
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form_row(form.PedidoProv) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(form.MTS) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-6">
+                            {{ form_row(form.MTE) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(form.CosteAlmProductBase) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form_row(form.Transporte) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(form.PrecioFactProv) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form_row(form.Extras) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(form.FactProv) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form_row(form.Observaciones) }}
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <div style="float:right;">{{ form_row(form.submit) }}</div>
+                    {{ form_rest(form) }}
+                </form>
+            {{ form_end(form) }}
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

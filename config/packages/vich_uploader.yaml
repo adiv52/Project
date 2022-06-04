@@ -1,0 +1,14 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        colection:
+            uri_prefix: http://localhost/EmbarquesSymfony/public/images/coleccion
+            upload_destination: '%kernel.project_dir%/public/images/coleccion'
+            namer: 
+                service: vich_uploader.namer_origname
+        instruccionesLavado:
+            uri_prefix: http://localhost/EmbarquesSymfony/public/images/instruccionesLavado
+            upload_destination: '%kernel.project_dir%/public/images/instruccionesLavado'
+            namer: 
+                service: vich_uploader.namer_origname

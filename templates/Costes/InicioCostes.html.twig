@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2 class="card-title">Productos</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct" style="float:right; margin:5px;">Añadir</button>
+                    </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row mt-4">
+                    {% for product in product %}
+                      <div class="col-md-6">
+                          <a href="{{ path('ViewAddCoste', { 'id': product.id }) }}" class="btn btn-secondary" style="width:100%; margin: 5px;"><strong style="color:white; font-size:22px;">{{product.Name}}</strong></a>
+                      </div>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="modal fade" id="addProduct">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Crear Producto</h5>
+                      <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      {{ form_start(form) }}
+                          <form>
+                              <div class="col">
+                                  {{ form_row(form.Name) }}
+                              </div>
+                              <br/>
+                              <br/>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <div style="float:right;">{{ form_row(form.submit) }}</div>
+                              {{ form_rest(form) }}
+                          </form>
+                      {{ form_end(form) }}
+                  </div>
+                </div>
+            </div>
+        </div>
+    
+{% endblock %}
+
+

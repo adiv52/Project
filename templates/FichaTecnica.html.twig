@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+	<head>
+        {% block head %}
+            <meta charset="utf-8">
+            <title>{% block title %}Ficha Tecnica{% endblock %}</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
+        {% endblock %}
+        
+	</head>
+	<body>
+        {% block body %}
+            <div>
+                <div>
+                    <img style="width:250px; display:block;margin:auto;" src="{{ absolute_url(asset('assets/img/logo.png')) }}" class="d-block" alt="...">
+                </div>                    
+                <div>
+                    <h1 style="font-size:28px; text-align:center;"><b>{{ colection.Nombre }} - Article Passport</b></h1>
+                    <hr/>
+                </div>
+                <div>
+                    <article id="tabla">
+                        <div>
+                            <h1 class="TituloTabla" >Product characteristics</h1>
+                            <table class="tabla">
+                                <tbody>
+                                    <tr>
+                                        <th>Applications</th>
+                                        <td>{{ colection.Aplications }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Composition faceside</th>
+                                        <td>{{ colection.Composition }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Statistic Code</th>
+                                        <td>{{ colection.StaticCode }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dyeing method</th>
+                                        <td>{{ colection.DyeingMethod }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Available colours </th>
+                                        <td>{{ colection.AvailableColours }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Minimum workable width </th>
+                                        <td>{{ colection.Width }} CM</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Roll length </th>
+                                        <td>{{ colection.Length }} M</td>
+                                    </tr>
+                                    <tr>
+                                        <th>GSM </th>
+                                        <td>{{ colection.GSM }}GS/M</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Backing/Finishing</th>
+                                        <td>{{ colection.ProductGroup }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {% if colection.DurabilitySpecifications is empty %}
+                        <div>
+                            
+                        </div>
+                        
+                        {% else %}
+                        <div>
+                            <h1 class="TituloTabla" >Durability specifications</h1>
+                            <table class="tabla">
+                                <tbody>
+                                        <tr>
+                                            <th rowspan=2 >Test</th>
+                                            <th rowspan=2 >Test Specification </th>
+                                            <th rowspan=2 class="centred" >Unit</th>
+                                            <th colspan=2 class="centred" >Testresult</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="centred" >WARP</th>
+                                            <th class="centred">WEFT</th>
+                                        </tr>
+                                        {% for DurabilitySpecifications in colection.DurabilitySpecifications %}
+                                            <tr>
+                                                <td>{{ DurabilitySpecifications.TestName }}</td>
+                                                <td>{{ DurabilitySpecifications.TestSpecification }}</td>
+                                                <td class="centred" >{{ DurabilitySpecifications.Unit }}</td>
+                                                <td colspan=2 class="centred" >{{ DurabilitySpecifications.TestResult }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                        {% if colection.ProcessingSpecifications is empty %}
+                        <div>
+                            
+                        </div>
+                        
+                        {% else %}
+                        <div>
+                            <h1 class="TituloTabla" >Processing specifications</h1>
+                            <table class="tabla">
+                                <tbody>
+                                    <tr>
+                                        <th rowspan=2 >Test</th>
+                                        <th rowspan=2 >Test Specification </th>
+                                        <th rowspan=2 class="centred" >Unit</th>
+                                        <th colspan=2 class="centred" >Testresult</th>
+                                    </tr>
+                                    <tr>
+                                    
+                                        <th class="centred" >WARP</th>
+                                        <th class="centred" >WEFT</th>
+                                    </tr>
+                                    {% for ProcessingSpecifications in colection.ProcessingSpecifications %}
+                                        <tr>
+                                            <td>{{ ProcessingSpecifications.TestName }}</td>
+                                            <td>{{ ProcessingSpecifications.TestSpecification }}</td>
+                                            <td class="centred" >{{ ProcessingSpecifications.Unit }}</td>
+                                            <td class="centred" >{{ ProcessingSpecifications.Warp }}</td>
+                                            <td class="centred" >{{ ProcessingSpecifications.Weft }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                        <div>
+                            <h1 class="TituloTabla" >Cleaning specifications and Instructions</h1>
+                            <table class="tabla">
+                                <tbody>
+                                    <tr>
+                                        <th rowspan=2 >Test</th>
+                                        <th rowspan=2 >Test Specification </th>
+                                        <th rowspan=2 class="centred" >Unit</th>
+                                        <th colspan=2 class="centred" >Testresult</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="centred" >WARP</th>
+                                        <th class="centred" >WEFT</th>
+                                    </tr>
+                                    {% for CleaningSpecifications in colection.CleaningSpecifications %}
+                                        <tr>
+                                            <td>{{ CleaningSpecifications.TestName }}</td>
+                                            <td>{{ CleaningSpecifications.TestSpecification }}</td>
+                                            <td class="centred" >{{ CleaningSpecifications.Unit }}</td>
+                                            <td class="centred" >{{ CleaningSpecifications.Warp }}</td>
+                                            <td class="centred" >{{ CleaningSpecifications.Weft }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr>
+                                        <th>Instructions</th>
+                                        {% for CleaningInstructions in colection.CleaningInstructions %}
+                                            <td colspan=4>{{ CleaningInstructions.Text }}</td>
+                                        {% endfor %}
+                                    </tr>
+                                    <tr>
+                                        <td colspan=4 >
+                                        {% for CleaningImages in colection.CleaningImages %}
+                                                <img style="width:60px;" src="file:///C:/xampp/htdocs/EmbarquesSynfony/public/images/instruccionesLavado/{{ CleaningImages.image }}" class="imgLavado" alt="...">
+                                        {% endfor %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                    <article id="percha">
+                        <h1 class="TituloTabla" >Colors</h1>
+                        <img src="file:///C:/xampp/htdocs/EmbarquesSynfony/public/images/coleccion/{{ colection.image }}" alt="...">
+                    </article>
+                    <footer style="width:100%;">
+                        <img style="width:200px;" src="{{ absolute_url(asset('assets/img/logo-datos.png')) }}" id="footer1"  alt="...">
+                        <img style="width:100px; margin: 5px;" src="{{ absolute_url(asset('assets/img/cert1.png')) }}" id="footer2"  class="d-block w-100" alt="...">
+                        <img style="width:100px; margin: 5px;" src="{{ absolute_url(asset('assets/img/cert2.png')) }}" id="footer3"  class="d-block w-100" alt="...">
+                        <img style="width:100px; margin: 5px;" src="{{ absolute_url(asset('assets/img/cert3.png')) }}" id="footer4"  class="d-block w-100" alt="...">
+                        <img style="width:100px;" src="{{ absolute_url(asset('assets/img/qrSK.png')) }}" id="footer5"  alt="...">
+                    </footer>
+                </div>
+            </div>
+            
+        {% endblock %}
+	</body>
+    <style>
+        *{
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+        }
+        #colorido{
+            width: 150px;
+            border-radius: 100px;
+            display:block;
+            margin:auto;
+        }
+        .tabla {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 10px;
+            text-align: left;   
+        }
+        #tabla{
+            width: 70%;
+            float:left;
+        }
+
+        .tabla td, .tabla th {
+            border-bottom: 1px solid #ddd;
+            border-left:none !important;
+            border-top:none !important;
+            border-right:none !important;
+        }
+        .centred{
+            text-align: center;
+        }
+        .TituloTabla{
+            font-size:18px;
+        }
+        #percha{
+            width: 29%;
+            float:right;
+        }
+        #footer1{
+            position: absolute;
+            top: 1100px; left: 0px;
+        }
+        #footer2{
+            position: absolute;
+            top: 1120px; left: 300px;
+        }
+        #footer3{
+            position: absolute;
+            top: 1125px; left: 420px;
+        }
+        #footer4{
+            position: absolute;
+            top: 1135px; left: 540px;
+        }
+        #footer5{
+            position: absolute;
+            top: 1120px; left: 800px;
+        }
+        .imgLavado{
+            padding: 5px;
+        }
+        #percha img{
+            width: 85%;
+            display:block;
+            margin:auto;
+            height: 750px;
+        }
+    </style>
+</html>

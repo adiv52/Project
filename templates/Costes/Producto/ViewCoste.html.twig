@@ -1,0 +1,269 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1></h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>Pedido Proveedor Nº{{ coste.PedidoProv }}</h2>
+                    </div>
+                    <div class="col-md-4">
+                        <a type="button" href="{{path('CostesProductoInicio')}}" class="btn btn-secondary" style="float:right; margin: ;">Volver</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct" style="float:right; margin-right: 10px ;">Editar</button>
+                    </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row mt-4">
+                    <div class="row">
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Pedido Proveedor:</strong> {{ coste.PedidoProv }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Metros totales salida:</strong> {{ coste.MTS }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Metros totales entrada:</strong> {{ coste.MTE }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste almacen producto base:</strong> {{ coste.CosteAlmProductBase }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Precio transporte Envio y Recogida:</strong> {{ coste.Transporte }}€
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                <strong>Factura proveedor:</strong> {{ coste.FactProv }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Precio factura Proveedor:</strong> {{ coste.PrecioFactProv }}€
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Costes Extras:</strong> {{ coste.Extras }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        {% if coste.MTE and coste.MTS %}
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>% Merma:</strong> {{ ((coste.MTS - coste.MTE) / coste.MTS) * 100 }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Almacen M.:</strong> {{ (coste.MTS * coste.CosteAlmProductBase) / coste.MTE }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Merma:</strong> {{ (coste.MTS - coste.MTE) * coste.CosteAlmProductBase }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Merma M. Final:</strong> {{ ((coste.MTS - coste.MTE) * coste.CosteAlmProductBase) / coste.MTS  }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Transporte M.:</strong> {{ coste.Transporte / coste.MTE }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Estampacion M.:</strong> {{ coste.PrecioFactProv / coste.MTE }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Observaciones:</strong> {{ coste.Observaciones }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Total:</strong> {{ ((coste.MTS * coste.CosteAlmProductBase) / coste.MTE) +  (((coste.MTS - coste.MTE) * coste.CosteAlmProductBase) / coste.MTS) +  (coste.Transporte / coste.MTE) + (coste.PrecioFactProv / coste.MTE) + coste.Extras }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>% Merma:</strong> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Almacen M.:</strong> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Merma:</strong> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Merma M. Final:</strong> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Transporte M.:</strong> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Coste Estampacion M.:</strong> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Observaciones:</strong> {{ coste.Observaciones }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin: 5px 0px 5px 0px;">
+                            <div class="card">
+                                <div class="card-body">
+                                    <strong>Total:</strong> {{ coste.Extras }}€/M
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="modal fade" id="addProduct" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Crear Producto</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form) }}
+                    <form>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form_row(form.PedidoProv) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(form.MTS) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-6">
+                                {{ form_row(form.MTE) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(form.CosteAlmProductBase) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form_row(form.Transporte) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(form.PrecioFactProv) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form_row(form.Extras) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(form.FactProv) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form_row(form.Observaciones) }}
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <div style="float:right;">{{ form_row(form.submit) }}</div>
+                        {{ form_rest(form) }}
+                    </form>
+                {{ form_end(form) }}
+            </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

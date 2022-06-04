@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <link rel="stylesheet" href="{{asset('assets')}}/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{asset('assets')}}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{asset('assets')}}/dist/css/adminlte.min.css">     
+    {% endblock %}
+  
+</head>
+<body class="control-sidebar-slide-close sidebar-collapse">
+  <div class="wrapper">
+  
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+      </ul>
+  
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <a href="http://192.168.1.103/Embarques/" class="brand-link">
+        <img src="{{asset('assets')}}/img/logoMarcaAgua.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">SANKRIN</span>
+      </a>
+  
+      <div class="sidebar">
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="http://192.168.1.103/Embarques/" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Embarques
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{path('CostesProductoInicio')}}" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Costes
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('app_cliente_index') }}" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Clientes
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ path('Colecciones') }}" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Fichas Tecnicas
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  
+    <div class="content-wrapper">
+        {% block body %}{% endblock %}
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+      <div class="p-3">
+        <h5>Info</h5>
+        <p>En desarrollo</p>
+      </div>
+    </aside>
+    <footer class="main-footer">
+      <div class="float-right d-none d-sm-inline">
+        Sankrin World
+      </div>
+      <strong>Copyright &copy; 2022 </a></strong> All rights reserved.
+    </footer>
+  </div>
+
+{% block javascripts %}
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
+    <script src="{{asset('assets')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/jszip/jszip.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="{{asset('assets')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="{{asset('assets')}}/dist/js/adminlte.min.js"></script>
+{% endblock %}
+</body>
+</html>
